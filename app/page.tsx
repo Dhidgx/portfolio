@@ -98,7 +98,7 @@ export default function Home() {
       <Section
         id="projects"
         title="Featured projects"
-        intro="Four things I've built, from client systems to research. Each row shows the project's pipeline, from input to output."
+        intro="Four things I've built, from client systems to research. Each card shows the project's pipeline, from input to output."
       >
         <div className="space-y-8 md:space-y-10">
           {projects.map((project, i) => (
