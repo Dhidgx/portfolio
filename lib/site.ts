@@ -29,22 +29,36 @@ export const facts = [
   { term: "Research", detail: "Fairness in AI-driven assessment" },
 ];
 
-export const skills = [
+// The MS research band on the home page. Its title and summary come from the matching project in projects.ts.
+export const research = {
+  label: "MS research",
+  slug: "fair-verification",
+  status: "Manuscript in preparation for MDPI Algorithms.",
+};
+
+// `icon` picks the line drawing shown on each Skills card (see components/SkillIcon.tsx).
+export type SkillIconName = "network" | "eye" | "wave" | "code" | "database";
+
+export const skills: { group: string; icon: SkillIconName; items: string[] }[] = [
   {
     group: "AI & LLMs",
+    icon: "network",
     items: ["LangChain", "LangGraph", "AutoGen", "Ollama", "RAG", "Multi-agent systems"],
   },
   {
     group: "ML & vision",
+    icon: "eye",
     items: ["YOLOv6", "VGG", "ST-GCN", "LightGBM", "Hugging Face"],
   },
-  { group: "Speech", items: ["Tacotron", "wav2vec", "Vocoders"] },
+  { group: "Speech", icon: "wave", items: ["Tacotron", "wav2vec", "Vocoders"] },
   {
     group: "Backend & web",
+    icon: "code",
     items: ["Python", "Django", "FastAPI", "Flask", "JavaScript", "React", "Next.js", "Vue.js", "Tailwind CSS"],
   },
   {
     group: "Data & tools",
+    icon: "database",
     items: ["PostgreSQL", "pgvector", "MySQL", "Docker", "Vercel", "Git", "Roboflow", "CVAT"],
   },
 ];

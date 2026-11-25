@@ -1,22 +1,29 @@
+type Tone = "white" | "ice" | "navy";
+
 type SectionProps = {
   id: string;
   title: string;
   intro?: string;
+  tone?: Tone;
   children: React.ReactNode;
 };
 
-// Each home-page section: heading on the left, content on the right (stacked on phones).
-export function Section({ id, title, intro, children }: SectionProps) {
+const tones: Record<Tone, { band: string; intro: string }> = {
+  white: { band: "bg-white text-ink", intro: "text-slate" },
+  ice: { band: "bg-ice text-ink", intro: "text-slate" },
+  navy: { band: "on-dark bg-navy-900 text-white", intro: "text-white/75" },
+};
+
+// A full-width home-page band: colour reaches the screen edges, content sits in the centred column.
+export function Section({ id, title, intro, tone = "white", children }: SectionProps) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-6 border-t border-rule">
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-20 md:grid-cols-12 md:py-24">
-        <div className="md:col-span-4">
-          <h2 id={`${id}-heading`} className="text-[28px] font-semibold leading-tight tracking-tight">
-            {title}
-          </h2>
-          {intro && <p className="mt-3 max-w-[32ch] text-graphite">{intro}</p>}
-        </div>
-        <div className="md:col-span-8">{children}</div>
+    <section id={id} aria-labelledby={`${id}-heading`} className={tones[tone].band}>
+      <div className="mx-auto max-w-page px-6 py-20 sm:px-8 md:py-28">
+        <h2 id={`${id}-heading`} className="max-w-[24ch] text-section font-bold text-balance">
+          {title}
+        </h2>
+        {intro && <p className={`mt-4 max-w-[60ch] ${tones[tone].intro}`}>{intro}</p>}
+        <div className="mt-12 md:mt-16">{children}</div>
       </div>
     </section>
   );
