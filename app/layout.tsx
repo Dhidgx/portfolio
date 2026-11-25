@@ -1,18 +1,34 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/plus-jakarta-sans";
 import "./globals.css";
-import { site } from "@/lib/site";
+import { ogImage, site } from "@/lib/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: site.title,
   description: site.description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: site.title,
     description: site.description,
     type: "website",
+    url: "/",
+    siteName: site.name,
+    locale: "en_US",
+    images: [ogImage],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    images: [ogImage.url],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B1F3F",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

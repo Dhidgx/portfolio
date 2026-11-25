@@ -1,0 +1,152 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the 1200x630 image shown when the site is shared.
+  To regenerate after `npm install`, run this in PowerShell from the project folder (one line):
+    Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" -Wait -ArgumentList "--headless=new",
+      "--allow-file-access-from-files","--hide-scrollbars","--window-size=1200,630","--screenshot=$PWD\public\og.png",
+      "file:///$($PWD -replace '\\','/')/scripts/og.html"
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: "Plus Jakarta Sans";
+        font-weight: 200 800;
+        src: url("../node_modules/@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2")
+          format("woff2");
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background: #0b1f3f;
+        color: #ffffff;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+        background-size: 32px 32px;
+        background-position: -1px -1px;
+        mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+      }
+      .text {
+        position: absolute;
+        left: 72px;
+        top: 64px;
+        bottom: 64px;
+        width: 560px;
+        display: flex;
+        flex-direction: column;
+      }
+      .mark {
+        width: 56px;
+        height: 56px;
+      }
+      h1 {
+        margin-top: auto;
+        font-size: 84px;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+      .role {
+        margin-top: 24px;
+        font-size: 30px;
+        font-weight: 600;
+        color: #8cb8ff;
+        letter-spacing: -0.01em;
+      }
+      .url {
+        margin-top: 40px;
+        font-size: 22px;
+        color: rgb(255 255 255 / 0.7);
+      }
+      .diagram {
+        position: absolute;
+        right: 56px;
+        top: 135px;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+
+    <div class="text">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#132C55" stroke="#8CB8FF" stroke-opacity="0.6" />
+        <g fill="none" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 44V20l9 13 9-13v24" />
+          <path d="M38 20v24M52 20v24M38 32h14" />
+        </g>
+      </svg>
+      <h1>Mudassar<br />Hussain</h1>
+      <p class="role">AI Engineer (RAG, Agents, Python)</p>
+      <p class="url">mudassar-hussain.vercel.app</p>
+    </div>
+
+    <!-- The hero's multi-agent schematic, static. -->
+    <svg class="diagram" viewBox="0 0 520 380" aria-hidden="true" font-family="Plus Jakarta Sans">
+      <defs>
+        <filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="520" height="380">
+          <feGaussianBlur stdDeviation="14" />
+        </filter>
+        <filter id="dot" filterUnits="userSpaceOnUse" x="0" y="0" width="520" height="380">
+          <feGaussianBlur stdDeviation="2.5" />
+        </filter>
+      </defs>
+      <g fill="none" stroke="#8CB8FF" stroke-opacity="0.5" stroke-width="1.25">
+        <path d="M214 148 L128 76" />
+        <path d="M306 148 L392 76" />
+        <path d="M176 190 H140" />
+        <path d="M344 190 H380" />
+        <path d="M214 232 L128 304" />
+        <path d="M306 232 L392 304" />
+      </g>
+      <circle cx="160" cy="98" r="7" fill="#8CB8FF" opacity="0.6" filter="url(#dot)" />
+      <circle cx="160" cy="98" r="2.5" fill="#FFFFFF" />
+      <circle cx="351" cy="266" r="7" fill="#8CB8FF" opacity="0.6" filter="url(#dot)" />
+      <circle cx="351" cy="266" r="2.5" fill="#FFFFFF" />
+      <rect x="170" y="142" width="180" height="96" rx="18" fill="#8CB8FF" opacity="0.28" filter="url(#glow)" />
+      <rect x="176" y="148" width="168" height="84" rx="14" fill="#132C55" stroke="#8CB8FF" stroke-width="1.5" />
+      <text x="260" y="188" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">Orchestrator</text>
+      <text x="260" y="208" text-anchor="middle" font-size="13" fill="#8CB8FF">LangGraph + AutoGen</text>
+      <g fill="#132C55" stroke="#8CB8FF" stroke-opacity="0.9">
+        <rect x="8" y="24" width="156" height="52" rx="10" />
+        <rect x="356" y="24" width="156" height="52" rx="10" />
+        <rect x="8" y="304" width="156" height="52" rx="10" />
+        <rect x="356" y="304" width="156" height="52" rx="10" />
+      </g>
+      <g fill="#0B1F3F" stroke="#8CB8FF" stroke-opacity="0.7" stroke-dasharray="4 3">
+        <rect x="8" y="162" width="132" height="56" rx="10" />
+        <rect x="380" y="162" width="132" height="56" rx="10" />
+      </g>
+      <g text-anchor="middle" font-size="15" font-weight="600" fill="#FFFFFF">
+        <text x="86" y="55">Email scheduling</text>
+        <text x="434" y="55">Meeting booking</text>
+        <text x="86" y="335">Lead checks</text>
+        <text x="434" y="335">Session tracking</text>
+        <text x="74" y="186">Company data</text>
+        <text x="446" y="186">Local LLMs</text>
+      </g>
+      <g text-anchor="middle" font-size="13" fill="#FFFFFF" fill-opacity="0.72">
+        <text x="74" y="204">pgvector RAG</text>
+        <text x="446" y="204">Ollama</text>
+      </g>
+    </svg>
+  </body>
+</html>
