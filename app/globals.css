@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #f4f6f5;
+  --color-ink: #17212b;
+  --color-graphite: #56616b;
+  --color-rule: #d3d9d6;
+  --color-signal: #0b7a63;
+  --color-signal-deep: #075c4a;
+  --color-signal-tint: #e1efea;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-signal-tint);
+}
+
+/* Pipeline connectors: a vertical arrow on phones, a horizontal one from tablet up. */
+.pipe-connector {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 1px;
+  height: 18px;
+  margin-left: 22px;
+  background: var(--color-graphite);
+}
+.pipe-connector::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: -3px;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 5px solid var(--color-graphite);
+}
+@media (min-width: 768px) {
+  .pipe-connector {
+    width: 22px;
+    height: 1px;
+    margin: 0 3px;
+    align-self: center;
+  }
+  .pipe-connector::after {
+    bottom: auto;
+    left: auto;
+    right: -1px;
+    top: -3px;
+    border-top: 3.5px solid transparent;
+    border-bottom: 3.5px solid transparent;
+    border-left: 5px solid var(--color-graphite);
+    border-right: 0;
+  }
+}
+
+/* The one load moment: the hero schematic draws itself outward from the orchestrator. */
+.schematic-edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .schematic-edge {
+    stroke-dashoffset: 1;
+    animation: schematic-draw 600ms ease-out forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+  .schematic-node {
+    opacity: 0;
+    animation: schematic-appear 450ms ease-out forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+@keyframes schematic-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes schematic-appear {
+  to {
+    opacity: 1;
+  }
+}
