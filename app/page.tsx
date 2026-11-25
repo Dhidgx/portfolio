@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AgentSchematic } from "@/components/AgentSchematic";
+import { button } from "@/components/button";
 import { Pipeline } from "@/components/Pipeline";
 import { Section } from "@/components/Section";
 import { projects } from "@/lib/projects";
@@ -8,41 +9,40 @@ import { facts, site, skills } from "@/lib/site";
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-20 pt-14 md:grid-cols-12 md:pb-24 md:pt-20">
-        <div className="md:col-span-7">
-          <p className="inline-flex items-center gap-2 text-[15px] text-graphite">
-            <span aria-hidden="true" className="size-2 rounded-full bg-signal" />
-            Available now for remote work
-          </p>
-          <h1 className="mt-5 max-w-[19ch] text-[clamp(2.4rem,5vw,3.9rem)] font-bold leading-[1.04] tracking-[-0.028em]">
-            I build LLM agents, RAG pipelines and the web apps people use them through.
-          </h1>
-          <p className="mt-6 max-w-[56ch] text-[18px] text-graphite">
-            AI engineer working in Python, FastAPI and Next.js. I&apos;ve built multi-agent systems for business
-            workflows and computer vision for a US healthcare-facilities client, and I&apos;m finishing an MS in
-            Computer Science at UET Lahore.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <a
-              href="#projects"
-              className="rounded-md bg-signal px-5 py-3 font-medium text-white hover:bg-signal-deep"
-            >
-              See my work
-            </a>
-            <a
-              href={site.resume}
-              download
-              className="rounded-md border border-ink/25 px-5 py-3 font-medium hover:border-ink"
-            >
-              Download resume
-            </a>
+      <section
+        data-hero
+        aria-labelledby="hero-heading"
+        className="on-dark relative isolate overflow-hidden bg-navy-900 text-white"
+      >
+        <div aria-hidden="true" className="blueprint absolute inset-0 -z-10" />
+        <div className="mx-auto grid max-w-page items-center gap-14 px-6 pb-20 pt-[calc(var(--header-h)+3rem)] sm:px-8 lg:min-h-[85svh] lg:grid-cols-12 lg:gap-10 lg:pb-16 lg:pt-[calc(var(--header-h)+2rem)]">
+          <div className="lg:col-span-6">
+            <p className="inline-flex min-h-9 items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 text-small text-white/85">
+              <span aria-hidden="true" className="size-2 rounded-full bg-sky ring-4 ring-sky/20" />
+              Available now for remote work
+            </p>
+            <h1 id="hero-heading" className="mt-6 max-w-[17ch] text-display font-bold text-balance">
+              I build LLM agents, RAG pipelines and the web apps people use them through.
+            </h1>
+            <p className="mt-6 max-w-[54ch] text-white/75 lg:text-card lg:leading-normal lg:tracking-normal">
+              AI engineer working in Python, FastAPI and Next.js. I&apos;ve built multi-agent systems for business
+              workflows and computer vision for a US healthcare-facilities client, and I&apos;m finishing an MS in
+              Computer Science at UET Lahore.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a href="#projects" className={button("solidOnNavy")}>
+                See my work
+              </a>
+              <a href={site.resume} download className={button("outlineOnNavy")}>
+                Download resume
+              </a>
+            </div>
+          </div>
+          <div className="max-w-[34rem] lg:col-span-6 lg:max-w-none lg:pl-4">
+            <AgentSchematic />
           </div>
         </div>
-        <div className="md:col-span-5">
-          <AgentSchematic />
-        </div>
-      </div>
+      </section>
 
       <Section id="about" title="About">
         <div className="grid gap-10 lg:grid-cols-8">

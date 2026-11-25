@@ -1,8 +1,9 @@
-// Everything about you that appears on the site lives here and in projects.ts.
+// Everything about you that appears on the site lives here, in projects.ts and in experience.ts.
 // Edit these values; the pages update automatically.
 
 export const site = {
   name: "Mudassar Hussain",
+  url: "https://mudassar-hussain.vercel.app",
   title: "Mudassar Hussain | AI Engineer (RAG, Agents, Python)",
   description:
     "AI engineer in Lahore building LLM agents, RAG pipelines and Python/Next.js apps. Available for remote contract and full-time roles with US and Canadian teams.",
@@ -12,6 +13,15 @@ export const site = {
   // Export your resume doc as a PDF, name it resume.pdf and put it in /public.
   resume: "/resume.pdf",
 };
+
+// Header and footer links. Each one points at a section on the home page.
+export const nav = [
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export const facts = [
   { term: "Education", detail: "MS Computer Science, UET Lahore, CGPA 3.67" },
