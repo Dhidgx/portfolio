@@ -109,7 +109,7 @@ export default function Home() {
           Smaller builds and practice projects are on{" "}
           <a
             href={site.github}
-            className="-my-2.5 inline-block py-2.5 font-semibold text-accent underline underline-offset-4 hover:text-navy-900"
+            className="-my-2.5 inline-block rounded-sm py-2.5 font-semibold text-accent underline underline-offset-4 hover:text-navy-900"
           >
             GitHub
           </a>
@@ -244,7 +244,7 @@ function ProjectCard({ project, flip }: { project: Project; flip: boolean }) {
           <Link
             href={`/projects/${project.slug}/`}
             aria-label={`Read the case study: ${project.title}`}
-            className="inline-flex min-h-11 items-center gap-2 font-semibold text-accent after:absolute after:inset-0 after:z-10 hover:text-navy-900"
+            className="inline-flex min-h-11 items-center gap-2 rounded-md font-semibold text-accent after:absolute after:inset-0 after:z-10 hover:text-navy-900"
           >
             Read the case study
             <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4.5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
