@@ -14,6 +14,14 @@ export const site = {
   resume: "/resume.pdf",
 };
 
+// The 1200×630 image shown when a page is shared on LinkedIn, Slack, X and so on.
+export const ogImage = {
+  url: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: "Mudassar Hussain, AI Engineer (RAG, Agents, Python)",
+};
+
 // Header and footer links. Each one points at a section on the home page.
 export const nav = [
   { label: "About", href: "/#about" },
