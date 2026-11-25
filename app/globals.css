@@ -1,15 +1,71 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Schibsted Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
-  --color-paper: #f4f6f5;
-  --color-ink: #17212b;
-  --color-graphite: #56616b;
-  --color-rule: #d3d9d6;
-  --color-signal: #0b7a63;
-  --color-signal-deep: #075c4a;
-  --color-signal-tint: #e1efea;
+  /* Navy and white, one light accent. Only these colour names exist. */
+  --color-*: initial;
+  --color-navy-950: #06142b;
+  --color-navy-900: #0b1f3f;
+  --color-navy-800: #132c55;
+  --color-navy-600: #2a4a7f;
+  --color-ink: #0e1b33;
+  --color-slate: #4a5a75;
+  --color-ice: #eef3fa;
+  --color-line: #d6deea;
+  --color-accent: #2563eb;
+  --color-sky: #8cb8ff;
+  --color-white: #ffffff;
+
+  /* Four sizes, plus one small size for chips, dates, captions and labels. */
+  --text-*: initial;
+  --text-display: clamp(2.25rem, 1.2rem + 4.4vw, 4rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.032em;
+  --text-section: clamp(2rem, 1.6rem + 1.6vw, 2.5rem);
+  --text-section--line-height: 1.12;
+  --text-section--letter-spacing: -0.024em;
+  --text-card: 1.3125rem;
+  --text-card--line-height: 1.3;
+  --text-card--letter-spacing: -0.014em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.45;
+
+  /* 1200px of content plus 32px of side padding. */
+  --container-page: 79rem;
+}
+
+@layer base {
+  :root {
+    --header-h: 4.5rem;
+    --ring: var(--color-accent);
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-size: var(--text-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Anchored headings and sections clear the fixed header. */
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-sky);
+    color: var(--color-navy-950);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -18,85 +74,54 @@
   }
 }
 
-body {
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font-feature-settings: "ss01";
-  -webkit-font-smoothing: antialiased;
+/* Any navy band: focus rings switch to sky. */
+@utility on-dark {
+  --ring: var(--color-sky);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-signal);
-  outline-offset: 3px;
-  border-radius: 4px;
+/* The hero's blueprint grid: faint white lines on a 32px grid, fading toward the bottom. */
+@utility blueprint {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-white) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-white) 5%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
 }
 
-::selection {
-  background: var(--color-signal-tint);
-}
-
-/* Pipeline connectors: a vertical arrow on phones, a horizontal one from tablet up. */
-.pipe-connector {
-  position: relative;
-  display: block;
-  flex: none;
-  width: 1px;
-  height: 18px;
-  margin-left: 22px;
-  background: var(--color-graphite);
-}
-.pipe-connector::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: -3px;
-  border-left: 3.5px solid transparent;
-  border-right: 3.5px solid transparent;
-  border-top: 5px solid var(--color-graphite);
-}
-@media (min-width: 768px) {
-  .pipe-connector {
-    width: 22px;
-    height: 1px;
-    margin: 0 3px;
-    align-self: center;
-  }
-  .pipe-connector::after {
-    bottom: auto;
-    left: auto;
-    right: -1px;
-    top: -3px;
-    border-top: 3.5px solid transparent;
-    border-bottom: 3.5px solid transparent;
-    border-left: 5px solid var(--color-graphite);
-    border-right: 0;
-  }
-}
-
-/* The one load moment: the hero schematic draws itself outward from the orchestrator. */
-.schematic-edge {
-  stroke-dasharray: 1;
+/*
+ * Hero schematic pulses: a short dash travels from the orchestrator out along each agent edge.
+ * The paths use pathLength="1", so a dashoffset of -1 is the far end of the edge.
+ * Hidden unless the viewer allows motion.
+ */
+.pulse {
+  stroke-dasharray: 0.001 2;
   stroke-dashoffset: 0;
+  opacity: 0;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .schematic-edge {
-    stroke-dashoffset: 1;
-    animation: schematic-draw 600ms ease-out forwards;
-    animation-delay: var(--delay, 0ms);
-  }
-  .schematic-node {
-    opacity: 0;
-    animation: schematic-appear 450ms ease-out forwards;
+  .pulse {
+    animation: pulse-travel 5s ease-in-out infinite;
     animation-delay: var(--delay, 0ms);
   }
 }
-@keyframes schematic-draw {
-  to {
+@keyframes pulse-travel {
+  0% {
     stroke-dashoffset: 0;
+    opacity: 0;
   }
-}
-@keyframes schematic-appear {
-  to {
+  4% {
     opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  24% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
   }
 }
